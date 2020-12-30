@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react';
+import RandomBoxColor from './RandomBoxColor';
+import "./App.css";
 function App() {
+  const [showBox, setShowBox] = React.useState(true);
+  const [msIntervalInput, setMSIntervalInput] = React.useState(500);
+  const [msIntervalToSend, setMSIntervalToSend] = React.useState(500);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {showBox ? <RandomBoxColor colorChangeInterval={msIntervalToSend}/> : null}
+      <button onClick={e => setShowBox(!showBox)}>Toggle Box</button>
+      <div>
+      <label>Interval: </label>
+      <input type="number" value={msIntervalInput} 
+        onChange={e => setMSIntervalInput(e.target.valueAsNumber)}/>
+      <button onClick={() => setMSIntervalToSend(msIntervalInput)}>
+        Udpate Interval
+      </button>
+      </div>
     </div>
-  );
+  )
 }
+
 
 export default App;
